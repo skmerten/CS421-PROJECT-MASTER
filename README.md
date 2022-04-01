@@ -6,6 +6,6 @@ Initial Commit
 Tasking:
 
 - Stephen: Table setup for Scanner (DONE)
-- Stephen: Scanner function (IN PROGRESS)
+- Stephen: Scanner function (DONE)
 - **NAME** : Word DFA Func (PENDING)
-- **NAME** : Period DFA Func (PENDING)
+- Stephen: Period DFA Func (IN PROGRESS)
