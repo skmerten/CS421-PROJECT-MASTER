@@ -3,6 +3,10 @@ Github Container for All parts of CS421 Project
 
 Initial Commit
 
-I am going to use a lot of code/references from HW2 to help with this. 
+Tasking:
 
-I am currently working on the scanner function
+Stephen - Table setup for Scanner [DONE]
+Stephen - Scanner function [IN PROGRESS]
+
+<NAME> - Word DFA Func [PENDING]
+<NAME> - Perdion DFA Func [PENDING]
