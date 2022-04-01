@@ -19,7 +19,6 @@ bool word (string s)
 {
 /* q0 = 0
  * qsa = 1
- * q0q1 = 2
  * qt = 3
  * qs = 4
  * qy = 5
@@ -33,80 +32,78 @@ bool word (string s)
   
   while (s[charpos] != '\0') 
     {
-      cout << "Char is: " << s[charpos] << endl;
-      cout << "State is: " << state << endl;
-      cout << endl;
       // From q0
-      if (state == 0 && (s[charpos] == 'a' && s[charpos] == 'e' && s[charpos] == 'i' && s[charpos] == 'o' && s[charpos] == 'u')){
-      state = 8;
-      }else if (state == 0 && (s[charpos] == 'd' && s[charpos] == 'w' && s[charpos] == 'z' && s[charpos] == 'y' && s[charpos] == 'j')){
-      state = 1;
-      }else if (state == 0 && (s[charpos] == 'b' && s[charpos] == 'g' && s[charpos] == 'h' && s[charpos] == 'k' && s[charpos] == 'm'
-            && s[charpos] == 'n' && s[charpos] == 'p' && s[charpos] == 'r')){
-      state = 5;
+      if (state == 0 && (s[charpos] == 'I' || s[charpos] == 'E' || s[charpos] == 'a' || s[charpos] == 'e' || s[charpos] == 'i' || s[charpos] == 'o' || s[charpos] == 'u')){
+          state = 8;
+      }else if (state == 0 && (s[charpos] == 'd' || s[charpos] == 'w' || s[charpos] == 'z' || s[charpos] == 'y' || s[charpos] == 'j')){
+          state = 1;
+      }else if (state == 0 && (s[charpos] == 'b' || s[charpos] == 'g' || s[charpos] == 'h' || s[charpos] == 'k' || s[charpos] == 'm'
+                                || s[charpos] == 'n' || s[charpos] == 'p' || s[charpos] == 'r')){
+          state = 5;
       }else if (state == 0 && s[charpos] == 'c'){
-      state = 7;
+          state = 7;
       }else if (state == 0 && s[charpos] == 't'){
-      state = 3;
+          state = 3;
       }else if (state == 0 && s[charpos] == 's'){
-      state = 4;
-      // From qsa
-      }else if (state == 1 && (s[charpos] == 'a' && s[charpos] == 'e' && s[charpos] == 'i' && s[charpos] == 'o' && s[charpos] == 'u')){
-      state = 8;
-      // From qy
-      }else if (state == 5 && (s[charpos] == 'a' && s[charpos] == 'e' && s[charpos] == 'i' && s[charpos] == 'o' && s[charpos] == 'u')){
-      state = 8;
+          state = 4;
+          // From qsa
+      }else if (state == 1 && (s[charpos] == 'I' || s[charpos] == 'E' || s[charpos] == 'a' || s[charpos] == 'e' || s[charpos] == 'i' || s[charpos] == 'o' || s[charpos] == 'u')){
+          state = 8;
+          // From qy
+      }else if (state == 5 && (s[charpos] == 'I' || s[charpos] == 'E' || s[charpos] == 'a' || s[charpos] == 'e' || s[charpos] == 'i' || s[charpos] == 'o' || s[charpos] == 'u')){
+          state = 8;
       }else if (state == 5 && s[charpos] == 'y'){
-      state = 1;
-      // From qt
+          state = 1;
+          // From qt
       }else if (state == 3 && s[charpos] == 's'){
-      state = 1;
-      }else if (state == 3 && (s[charpos] == 'a' && s[charpos] == 'e' && s[charpos] == 'i' && s[charpos] == 'o' && s[charpos] == 'u')){
-      state = 8;
-      // From qs
+          state = 1;
+      }else if (state == 3 && (s[charpos] == 'I' || s[charpos] == 'E' || s[charpos] == 'a' || s[charpos] == 'e' || s[charpos] == 'i' || s[charpos] == 'o' || s[charpos] == 'u')){
+          state = 8;
+          // From qs
       }else if (state == 4 && s[charpos] == 'h'){
-      state = 1;
-      }else if (state == 4 && (s[charpos] == 'a' && s[charpos] == 'e' && s[charpos] == 'i' && s[charpos] == 'o' && s[charpos] == 'u')){
-      state = 8;
-      // From qc
-      }else if (state == 5 && s[charpos] == 'h'){
-      state = 1;
-      // From q0q1
-      }else if (state == 8 && (s[charpos] == 'a' && s[charpos] == 'e' && s[charpos] == 'i' && s[charpos] == 'o' && s[charpos] == 'u')){
-      state = 8;
-      }else if (state == 8 && s[charpos] == 'n'){
-      state = 6;
-      }else if (state == 8 && (s[charpos] == 'd' && s[charpos] == 'w' && s[charpos] == 'z' && s[charpos] == 'y' && s[charpos] == 'j')){
-      state = 1;
+          state = 1;
+      }else if (state == 4 && (s[charpos] == 'I' || s[charpos] == 'E' || s[charpos] == 'a' || s[charpos] == 'e' || s[charpos] == 'i' || s[charpos] == 'o' || s[charpos] == 'u')){
+          state = 8;
+          // From qc
+      }else if (state == 7 && s[charpos] == 'h'){
+          state = 1;
+          // From q0q1
+      }else if (state == 8 && (s[charpos] == 'I' || s[charpos] == 'E' || s[charpos] == 'a' || s[charpos] == 'e' || s[charpos] == 'i' || s[charpos] == 'o' || s[charpos] == 'u')){
+          state = 8;
+      }else if (state == 8 && (s[charpos] == 'b' || s[charpos] == 'g' || s[charpos] == 'h' || s[charpos] == 'k' || s[charpos] == 'm'
+                                || s[charpos] == 'n' || s[charpos] == 'p' || s[charpos] == 'r')){
+          state = 6;
+      }else if (state == 8 && (s[charpos] == 'd' || s[charpos] == 'w' || s[charpos] == 'z' || s[charpos] == 'y' || s[charpos] == 'j')){
+          state = 1;
       }else if (state == 8 && s[charpos] == 'c'){
-      state = 7;
+          state = 7;
       }else if (state == 8 && s[charpos] == 't'){
-      state = 3;
+          state = 3;
       }else if (state == 8 && s[charpos] == 's'){
-      state = 4;
-      //else if (state == 8 && s[charpos] == 'h')
-      //state =;
-      // From q0qy  
-      }else if (state == 6 && (s[charpos] == 'a' && s[charpos] == 'e' && s[charpos] == 'i' && s[charpos] == 'o' && s[charpos] == 'u')){
-      state = 8; 
-      }else if (state == 6 && (s[charpos] == 'd' && s[charpos] == 'w' && s[charpos] == 'z' && s[charpos] == 'y' && s[charpos] == 'j')){
-      state = 1;
-      }else if (state == 6 && (s[charpos] == 'b' && s[charpos] == 'g' && s[charpos] == 'h' && s[charpos] == 'k' && s[charpos] == 'm'
-            && s[charpos] == 'n' && s[charpos] == 'p' && s[charpos] == 'r')){
-      state = 5;
+          state = 4;
+          //else if (state == 8 && s[charpos] == 'h')
+          //state =;
+          // From q0qy
+      }else if (state == 6 && (s[charpos] == 'I' || s[charpos] == 'E' || s[charpos] == 'a' || s[charpos] == 'e' || s[charpos] == 'i' || s[charpos] == 'o' || s[charpos] == 'u')){
+          state = 8;
+      }else if (state == 6 && (s[charpos] == 'd' || s[charpos] == 'w' || s[charpos] == 'z' || s[charpos] == 'y' || s[charpos] == 'j')){
+          state = 1;
+      }else if (state == 6 && (s[charpos] == 'b' || s[charpos] == 'g' || s[charpos] == 'h' || s[charpos] == 'k' || s[charpos] == 'm'
+                                || s[charpos] == 'n' || s[charpos] == 'p' || s[charpos] == 'r')){
+          state = 5;
       }else if (state == 6 && s[charpos] == 'c'){
-      state = 7;
+          state = 7;
       }else if (state == 6 && s[charpos] == 't'){
-      state = 3;
+          state = 3;
       }else if (state == 6 && s[charpos] == 's'){
-      state = 4;
+          state = 4;
       }else{
-	      return(false);
+          return(false);
       }
       charpos++;
     }//end of while
 
-  if (state == 0 || state == 2 || state == 8) return(true);  // end in a final state
+  if (state == 0 || state == 6 || state == 8) return(true);  // end in a final state
    else return(false);
 }
 
@@ -140,7 +137,7 @@ string tokenName[30] = {"WORD", "WORD1", "WORD2", "PERIOD", "VERB", "VERBNEG", "
  * ~ Stephen
 */
 const int reservedWordCount = 18;
-string reservedWords[reservedWordCount]= {"masu", "masen", "mashita", "masendeshita", "des", "deshita", "o", "we", "ni", "watashi", 
+string reservedWords[reservedWordCount]= {"masu", "masen", "mashita", "masendeshita", "desu", "deshita", "o", "wa", "ni", "watashi", 
       "anata", "kare", "anojo", "sore", "mata", "soshite", "shikashi", "dakara"};
 tokentype reservedTokens[reservedWordCount] = {VERB, VERBNEG, VERBPAST, VERBPASTNEG, IS, WAS, OBJECT, SUBJECT, DESTINATION, PRONOUN, 
       PRONOUN, PRONOUN, PRONOUN, PRONOUN, CONNECTOR, CONNECTOR, CONNECTOR, CONNECTOR};
@@ -175,7 +172,6 @@ int scanner(tokentype& tt, string& w)
   */
 
   fin >> w;  // grab next word from input file
-  cout << "THIS IS THE WORD" << w << endl;
   if (w == "eofm"){                 // Check for EOF -> return if EOF
     tt = EOFM;
   }else if(word(w)){                // Check for WORD
@@ -199,6 +195,10 @@ int scanner(tokentype& tt, string& w)
         tt = reservedTokens[i];
       }
     }
+  }
+  if (tt == WORD){
+    cout << ">>>>>Lexical Error: The string is not in my language" << endl;
+    tt = ERROR;
   }
 }//the end of scanner
 
