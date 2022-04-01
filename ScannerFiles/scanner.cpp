@@ -20,11 +20,8 @@ bool word (string s)
 
   int state = 0;
   int charpos = 0;
-
-  // QUICK TEST OF SCANNER
-  return false;
-
-  /* replace the following todo the word dfa   
+  return true;
+  /* replace the following todo the word dfa 
   
   while (s[charpos] != '\0') 
     {
@@ -41,10 +38,10 @@ bool word (string s)
       charpos++;
     }//end of while
 
-  // where did I end up????
+  //where did I end up????
   if (state == 2) return(true);  // end in a final state
    else return(false);
- */
+*/
 }
 
 // PERIOD DFA 
@@ -128,9 +125,9 @@ int scanner(tokentype& tt, string& w)
 
   // If word check for word1 or word2
   if (tt == WORD){
-    if(w[w.size()] == 'I' || w[w.size()-1] == 'E'){
+    if(w[w.size()-1] == 'I' || w[w.size()-1] == 'E'){
         tt = WORD2;
-      }else if(w[w.size()] == 'a' || w[w.size()-1] == 'e' || w[w.size()-1] == 'i' || w[w.size()-1] == 'o' || w[w.size()-1] == 'u'){
+      }else if(w[w.size()-1] == 'n' || w[w.size()-1] == 'a' || w[w.size()-1] == 'e' || w[w.size()-1] == 'i' || w[w.size()-1] == 'o' || w[w.size()-1] == 'u'){
         tt = WORD1;
     }
     // Capture token for reserved word if present
