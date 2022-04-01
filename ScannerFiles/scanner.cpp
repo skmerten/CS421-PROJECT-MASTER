@@ -1,6 +1,7 @@
 #include<iostream>
 #include<fstream>
 #include<string>
+
 using namespace std;
 
 /* Look for all **'s and complete them */
@@ -19,7 +20,7 @@ bool word (string s)
 
   int state = 0;
   int charpos = 0;
-  /* replace the following todo the word dfa   */
+  /* replace the following todo the word dfa   
   
   while (s[charpos] != '\0') 
     {
@@ -39,7 +40,7 @@ bool word (string s)
   // where did I end up????
   if (state == 2) return(true);  // end in a final state
    else return(false);
- 
+ */
 }
 
 // PERIOD DFA 
@@ -50,17 +51,28 @@ bool period (string s)
 
 // ------ Three  Tables -------------------------------------
 
-// TABLES Done by: **
+// TABLES Done by: Stephen Merten
 
-// ** Update the tokentype to be WORD1, WORD2, PERIOD, ERROR, EOFM, etc.
-enum tokentype {ERROR, };
-
-// ** For the display names of tokens - must be in the same order as the tokentype.
-string tokenName[30] = { }; 
+// Dumping ALL token types from documentation here
+enum tokentype {WORD, WORD1, WORD2, PERIOD, VERB, VERBNEG, VERBPAST, VERBPASTNEG, IS, WAS, OBJECT, SUBJECT, DESTINATION, PRONOUN, CONNECTOR, EOFM, ERROR};
+// Per instructions: this list of strings directly matches the above. I think We have freedom to change but for now i left it. ~ Stephen
+string tokenName[30] = {"WORD", "WORD1", "WORD2", "PERIOD", "VERB", "VERBNEG", "VERBPAST", "VERBPASTNEG", "IS", "WAS", "OBJECT", "SUBJECT", "DESTINATION", "PRONOUN", "CONNECTOR", "EOFM", "ERROR"}; 
 
 // ** Need the reservedwords table to be set up here. 
+
+/* I am setting this up like above:
+ * reservedWords and reservedTokens will be of identical length. I plan to traverse the Words list for a match
+ * grab the index of the match (if applicable) and then use that to access the corresponding token from the tokens list
+ * ~ Stephen
+*/
+string reservedWords[18]= {"masu", "masen", "mashita", "masendeshita", "des", "deshita", "o", "we", "ni", "watashi", 
+      "anata", "kare", "anojo", "sore", "mata", "soshite", "shikashi", "dakara"};
+tokentype reservedTokens[18] = {VERB, VERBNEG, VERBPAST, VERBPASTNEG, IS, WAS, OBJECT, SUBJECT, DESTINATION, PRONOUN, 
+      PRONOUN, PRONOUN, PRONOUN, PRONOUN, CONNECTOR, CONNECTOR, CONNECTOR, CONNECTOR};
+
 // ** Do not require any file input for this. Hard code the table.
 // ** a.out should work without any additional files.
+
 
 
 // ------------ Scanner and Driver ----------------------- 
@@ -69,28 +81,34 @@ ifstream fin;  // global stream for reading from the input file
 
 // Scanner processes only one word each time it is called
 // Gives back the token type and the word itself
-// ** Done by: 
+// ** Done by: Stephen Merten
 int scanner(tokentype& tt, string& w)
 { 
   // Obtain input file name. (Can be changed) ~ Stephen
-  string fname;
-  cout << "Enter the input file name:";
-  cin >> fname; 
 
-  fin.open( fname.c_str(), fstream::in);
+  if (w[0] == EOF){                 // Check for EOF -> return if EOF
+    tt = EOFM;
+  }else if(word(w)){    // Check for IDENT
+    tt = WORD;
+  } else if (period(w)){    // Check for REAL
+    tt = PERIOD;
+  } else //none of the FAs returned TRUE
+    { cout << ">>>>>Lexical Error: The string is not in my language" << endl;
+      tt = ERROR; }
+
   // ** Grab the next word from the file via fin
-  // 1. If it is eofm, return right now.   
+  // 1. If it is eofm, return right now.    DONE ~ Stephen
 
   /*  **
   2. Call the token functions (word and period) 
      one after another (if-then-else).
      Generate a lexical error message if both DFAs failed.
-     Let the tokentype be ERROR in that case.
+     Let the tokentype be ERROR in that case.   DONE ~ Stephen
 
   3. If it was a word,
      check against the reservedwords list.
      If not reserved, tokentype is WORD1 or WORD2
-     decided based on the last character.
+     decided based on the last character. 
 
   4. Return the token type & string  (pass by reference)
   */
