@@ -108,10 +108,7 @@ int scanner(tokentype& tt, string& w)
   4. Return the token type & string  (pass by reference)
   */
 
-  cout << ".....Scanner was called..." << endl;
-
   fin >> w;  // grab next word from input file
-  cout << ">>>>>Word is:" << w << endl;   
 
   if (w == "eofm"){                 // Check for EOF -> return if EOF
     tt = EOFM;
