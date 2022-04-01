@@ -20,6 +20,10 @@ bool word (string s)
 
   int state = 0;
   int charpos = 0;
+
+  // QUICK TEST OF SCANNER
+  return true;
+
   /* replace the following todo the word dfa   
   
   while (s[charpos] != '\0') 
@@ -65,15 +69,14 @@ string tokenName[30] = {"WORD", "WORD1", "WORD2", "PERIOD", "VERB", "VERBNEG", "
  * grab the index of the match (if applicable) and then use that to access the corresponding token from the tokens list
  * ~ Stephen
 */
-string reservedWords[18]= {"masu", "masen", "mashita", "masendeshita", "des", "deshita", "o", "we", "ni", "watashi", 
+const int reservedWordCount = 18;
+string reservedWords[reservedWordCount]= {"masu", "masen", "mashita", "masendeshita", "des", "deshita", "o", "we", "ni", "watashi", 
       "anata", "kare", "anojo", "sore", "mata", "soshite", "shikashi", "dakara"};
-tokentype reservedTokens[18] = {VERB, VERBNEG, VERBPAST, VERBPASTNEG, IS, WAS, OBJECT, SUBJECT, DESTINATION, PRONOUN, 
+tokentype reservedTokens[reservedWordCount] = {VERB, VERBNEG, VERBPAST, VERBPASTNEG, IS, WAS, OBJECT, SUBJECT, DESTINATION, PRONOUN, 
       PRONOUN, PRONOUN, PRONOUN, PRONOUN, CONNECTOR, CONNECTOR, CONNECTOR, CONNECTOR};
 
 // ** Do not require any file input for this. Hard code the table.
 // ** a.out should work without any additional files.
-
-
 
 // ------------ Scanner and Driver ----------------------- 
 
@@ -84,18 +87,6 @@ ifstream fin;  // global stream for reading from the input file
 // ** Done by: Stephen Merten
 int scanner(tokentype& tt, string& w)
 { 
-  // Obtain input file name. (Can be changed) ~ Stephen
-
-  if (w[0] == EOF){                 // Check for EOF -> return if EOF
-    tt = EOFM;
-  }else if(word(w)){    // Check for IDENT
-    tt = WORD;
-  } else if (period(w)){    // Check for REAL
-    tt = PERIOD;
-  } else //none of the FAs returned TRUE
-    { cout << ">>>>>Lexical Error: The string is not in my language" << endl;
-      tt = ERROR; }
-
   // ** Grab the next word from the file via fin
   // 1. If it is eofm, return right now.    DONE ~ Stephen
 
@@ -113,6 +104,33 @@ int scanner(tokentype& tt, string& w)
   4. Return the token type & string  (pass by reference)
   */
 
+  cout << ".....Scanner was called..." << endl;
+
+  fin >> w;  // grab next word from input file
+  cout << ">>>>>Word is:" << w << endl;   
+
+  if (w == "eofm"){                 // Check for EOF -> return if EOF
+    tt = EOFM;
+  }else if(word(w)){                // Check for WORD
+    tt = WORD;
+  } else if (period(w)){            // Check for PERIOD
+    tt = PERIOD;
+  } else //none of the FAs returned TRUE
+    { cout << ">>>>>Lexical Error: The string is not in my language" << endl;
+      tt = ERROR; }
+
+
+  // Capture token for reserved word if present
+  if (tt == WORD){
+    for(int i = 0; i < reservedWordCount; i++){
+      if (w == reservedWords[i]){
+        tt = reservedTokens[i];
+      }
+    }
+  }
+  if (tt == WORD){
+    tt = ERROR;
+  }
 }//the end of scanner
 
 
