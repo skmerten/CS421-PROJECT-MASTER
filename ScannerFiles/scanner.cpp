@@ -22,7 +22,7 @@ bool word (string s)
   int charpos = 0;
 
   // QUICK TEST OF SCANNER
-  return true;
+  return false;
 
   /* replace the following todo the word dfa   
   
@@ -48,9 +48,16 @@ bool word (string s)
 }
 
 // PERIOD DFA 
-// Done by: **
+// Done by: Stephen Merten
 bool period (string s)
-{  // complete this **
+{  
+  if(s.size() > 1){
+    return false;
+  }else if(s != "."){
+    return false;
+  }else{
+    return true;
+  }
 }
 
 // ------ Three  Tables -------------------------------------
