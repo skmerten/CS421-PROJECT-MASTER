@@ -17,31 +17,97 @@ using namespace std;
 // RE:   **
 bool word (string s)
 {
-
+/* q0 = 0
+ * qsa = 1
+ * q0q1 = 2
+ * qt = 3
+ * qs = 4
+ * qy = 5
+ * q0qy = 6
+ * qc = 7
+ * q0q1 = 8
+ */
   int state = 0;
   int charpos = 0;
-  return true;
-  /* replace the following todo the word dfa 
+  /* replace the following todo the word dfa */
   
   while (s[charpos] != '\0') 
     {
-      if (state == 0 && s[charpos] == 'a')
+      cout << "Char is: " << s[charpos] << endl;
+      cout << "State is: " << state << endl;
+      cout << endl;
+      // From q0
+      if (state == 0 && (s[charpos] == 'a' && s[charpos] == 'e' && s[charpos] == 'i' && s[charpos] == 'o' && s[charpos] == 'u')){
+      state = 8;
+      }else if (state == 0 && (s[charpos] == 'd' && s[charpos] == 'w' && s[charpos] == 'z' && s[charpos] == 'y' && s[charpos] == 'j')){
       state = 1;
-      else
-      if (state == 1 && s[charpos] == 'b')
-      state = 2;
-      else
-      if (state == 2 && s[charpos] == 'b')
-      state = 2;
-      else
-	  return(false);
+      }else if (state == 0 && (s[charpos] == 'b' && s[charpos] == 'g' && s[charpos] == 'h' && s[charpos] == 'k' && s[charpos] == 'm'
+            && s[charpos] == 'n' && s[charpos] == 'p' && s[charpos] == 'r')){
+      state = 5;
+      }else if (state == 0 && s[charpos] == 'c'){
+      state = 7;
+      }else if (state == 0 && s[charpos] == 't'){
+      state = 3;
+      }else if (state == 0 && s[charpos] == 's'){
+      state = 4;
+      // From qsa
+      }else if (state == 1 && (s[charpos] == 'a' && s[charpos] == 'e' && s[charpos] == 'i' && s[charpos] == 'o' && s[charpos] == 'u')){
+      state = 8;
+      // From qy
+      }else if (state == 5 && (s[charpos] == 'a' && s[charpos] == 'e' && s[charpos] == 'i' && s[charpos] == 'o' && s[charpos] == 'u')){
+      state = 8;
+      }else if (state == 5 && s[charpos] == 'y'){
+      state = 1;
+      // From qt
+      }else if (state == 3 && s[charpos] == 's'){
+      state = 1;
+      }else if (state == 3 && (s[charpos] == 'a' && s[charpos] == 'e' && s[charpos] == 'i' && s[charpos] == 'o' && s[charpos] == 'u')){
+      state = 8;
+      // From qs
+      }else if (state == 4 && s[charpos] == 'h'){
+      state = 1;
+      }else if (state == 4 && (s[charpos] == 'a' && s[charpos] == 'e' && s[charpos] == 'i' && s[charpos] == 'o' && s[charpos] == 'u')){
+      state = 8;
+      // From qc
+      }else if (state == 5 && s[charpos] == 'h'){
+      state = 1;
+      // From q0q1
+      }else if (state == 8 && (s[charpos] == 'a' && s[charpos] == 'e' && s[charpos] == 'i' && s[charpos] == 'o' && s[charpos] == 'u')){
+      state = 8;
+      }else if (state == 8 && s[charpos] == 'n'){
+      state = 6;
+      }else if (state == 8 && (s[charpos] == 'd' && s[charpos] == 'w' && s[charpos] == 'z' && s[charpos] == 'y' && s[charpos] == 'j')){
+      state = 1;
+      }else if (state == 8 && s[charpos] == 'c'){
+      state = 7;
+      }else if (state == 8 && s[charpos] == 't'){
+      state = 3;
+      }else if (state == 8 && s[charpos] == 's'){
+      state = 4;
+      //else if (state == 8 && s[charpos] == 'h')
+      //state =;
+      // From q0qy  
+      }else if (state == 6 && (s[charpos] == 'a' && s[charpos] == 'e' && s[charpos] == 'i' && s[charpos] == 'o' && s[charpos] == 'u')){
+      state = 8; 
+      }else if (state == 6 && (s[charpos] == 'd' && s[charpos] == 'w' && s[charpos] == 'z' && s[charpos] == 'y' && s[charpos] == 'j')){
+      state = 1;
+      }else if (state == 6 && (s[charpos] == 'b' && s[charpos] == 'g' && s[charpos] == 'h' && s[charpos] == 'k' && s[charpos] == 'm'
+            && s[charpos] == 'n' && s[charpos] == 'p' && s[charpos] == 'r')){
+      state = 5;
+      }else if (state == 6 && s[charpos] == 'c'){
+      state = 7;
+      }else if (state == 6 && s[charpos] == 't'){
+      state = 3;
+      }else if (state == 6 && s[charpos] == 's'){
+      state = 4;
+      }else{
+	      return(false);
+      }
       charpos++;
     }//end of while
 
-  //where did I end up????
-  if (state == 2) return(true);  // end in a final state
+  if (state == 0 || state == 2 || state == 8) return(true);  // end in a final state
    else return(false);
-*/
 }
 
 // PERIOD DFA 
@@ -109,7 +175,7 @@ int scanner(tokentype& tt, string& w)
   */
 
   fin >> w;  // grab next word from input file
-
+  cout << "THIS IS THE WORD" << w << endl;
   if (w == "eofm"){                 // Check for EOF -> return if EOF
     tt = EOFM;
   }else if(word(w)){                // Check for WORD
