@@ -7,5 +7,5 @@ Tasking:
 
 - Stephen: Table setup for Scanner (DONE)
 - Stephen: Scanner function (DONE)
-- **NAME** : Word DFA Func (PENDING)
-- Stephen: Period DFA Func (IN PROGRESS)
+- Stephen: Word DFA Func (PENDING)
+- Stephen: Period DFA Func (DONE)
