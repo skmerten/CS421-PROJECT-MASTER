@@ -5,8 +5,7 @@ Initial Commit
 
 Tasking:
 
-Stephen - Table setup for Scanner [DONE]
-Stephen - Scanner function [IN PROGRESS]
-
-<NAME> - Word DFA Func [PENDING]
-<NAME> - Perdion DFA Func [PENDING]
+- Stephen: Table setup for Scanner ![#c5f015](DONE)
+- Stephen: Scanner function (IN PROGRESS)
+- **<NAME>** : Word DFA Func (PENDING)
+- **<NAME>** : Perdion DFA Func (PENDING)
