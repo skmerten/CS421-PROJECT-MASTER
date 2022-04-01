@@ -119,17 +119,19 @@ int scanner(tokentype& tt, string& w)
     { cout << ">>>>>Lexical Error: The string is not in my language" << endl;
       tt = ERROR; }
 
-
-  // Capture token for reserved word if present
+  // If word check for word1 or word2
   if (tt == WORD){
+    if(w[w.size()] == 'I' || w[w.size()-1] == 'E'){
+        tt = WORD2;
+      }else if(w[w.size()] == 'a' || w[w.size()-1] == 'e' || w[w.size()-1] == 'i' || w[w.size()-1] == 'o' || w[w.size()-1] == 'u'){
+        tt = WORD1;
+    }
+    // Capture token for reserved word if present
     for(int i = 0; i < reservedWordCount; i++){
       if (w == reservedWords[i]){
         tt = reservedTokens[i];
       }
     }
-  }
-  if (tt == WORD){
-    tt = ERROR;
   }
 }//the end of scanner
 
