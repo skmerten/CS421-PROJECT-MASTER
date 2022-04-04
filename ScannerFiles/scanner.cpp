@@ -219,7 +219,7 @@ int scanner(tokentype& tt, string& w)
         }
     }
     if (tt == WORD){
-        cout << ">>>>>Lexical Error: The string is not in my language" << endl;
+        cout << "Lexical error: " << w << " is not a valid token" << endl;
         tt = ERROR;
     }
 }//the end of scanner
