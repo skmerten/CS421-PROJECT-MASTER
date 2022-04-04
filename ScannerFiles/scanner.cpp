@@ -15,6 +15,14 @@ using namespace std;
 // WORD DFA 
 // Done by: Stephen Merten
 // RE:   **  TODO:
+/*
+* ( (a | i | u | e | o | I | E) | 
+* (a | i | u | e | o | I | E) n | 
+* (b | d | g | h | j | k | m | n | p | r | s | t | w | y | z) (a | i | u | e | o | I | E) | 
+* (b | d | g | h | j | k | m | n | p | r | s | t | w | y | z) (a | i | u | e | o | I | E) n |
+* (by | gy | hy | ky | my | ny | py | ry | ch | sh ) (a | i | u | e | o | I | E) | 
+* (by | gy | hy | ky | my | ny | py | ry | ch | sh ) (a | i | u | e | o | I | E) n)^+  
+*/
 
 // word() function to check if our given word in the language is valid. This function is called every time we have a
 // next word in our language.
