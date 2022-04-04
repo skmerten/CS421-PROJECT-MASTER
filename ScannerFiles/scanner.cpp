@@ -13,7 +13,7 @@ using namespace std;
 // --------- Two DFAs ---------------------------------
 
 // WORD DFA 
-// Done by: Zach Pownell and Stephen Mertin
+// Done by: Stephen Merten
 // RE:   **  TODO:
 
 // word() function to check if our given word in the language is valid. This function is called every time we have a
@@ -146,7 +146,7 @@ bool period (string s) {
 
 // ------ Three Tables -------------------------------------
 
-// TABLES Done by: Stephen Merten
+// TABLES Done by: Zach Pownell and Larry Haskel
 
 // Dumping ALL token types from documentation here
 enum tokentype {WORD, WORD1, WORD2, PERIOD, VERB, VERBNEG, VERBPAST, VERBPASTNEG, IS, WAS, OBJECT, SUBJECT, DESTINATION, PRONOUN, CONNECTOR, EOFM, ERROR};
@@ -175,7 +175,7 @@ ifstream fin;  // global stream for reading from the input file
 
 // Scanner processes only one word each time it is called
 // Gives back the token type and the word itself
-// ** Done by: Stephen Merten
+// ** Done by: Zach Pownell and Larry Haskel
 int scanner(tokentype& tt, string& w)
 {
     // ** Grab the next word from the file via fin
@@ -201,7 +201,7 @@ int scanner(tokentype& tt, string& w)
     } else if (period(w)){            // Check for PERIOD
         tt = PERIOD;
     } else //none of the FAs returned TRUE
-    { cout << ">>>>>Lexical Error: The string is not in my language" << endl;
+    { cout << "Lexical error: " << w << " is not a valid token" << endl;
         tt = ERROR; }
 
     // If word check for word1 or word2

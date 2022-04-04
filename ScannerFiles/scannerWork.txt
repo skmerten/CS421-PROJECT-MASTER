@@ -7,19 +7,21 @@ Group#:
 Must have divided the work as specified by the assignment
 sheet. If the member did not fully contribute to the assigned part, 
 do not list his/her name!!!!!
-o	Member A tasks(DFA, tables, scanner)- who: 
-o	Member B tasks(DFA, tables, scanner)- who: 
-o	Member C tasks(word, period)- who: 
+o	Member A tasks(DFA, tables, scanner)- who: Zach Pownell
+o	Member B tasks(DFA, tables, scanner)- who: Larry Haskell
+o	Member C tasks(word, period)- who: Stephen Merten
 
 2.     Who came to the meeting to test everything together? 
+	All three! Zach Pownell, Larry Haskell, and Stephen Merten
 
 3.     You have included all the required comments? (RE and Done By): 
+		All comments included.
 
 4.     Your program works correctly on scannertest1 and scannertest2? 
+	Scanner.cpp was tested against both and all outputs are as expected.
 
 5.     Any other remarks.
-       We have learned that the more time we dedicate, the better results we see. \
-       Collaboration is good skill to apply when it comes to work in teams. 
+       We worked on a majority of the project together whether in person or over video calls (and shared screens) and we found that having three sets of eyes reviewing the code helped identify issues significantly faster that if alone.
 
 
 checkIt_LK in 24 hours and immediately correct and re-submit.
