@@ -7,7 +7,7 @@ using namespace std;
 /* Look for all **'s and complete them */
 
 //=====================================================
-// File scanner.cpp written by: Group Number: ** 
+// File scanner.cpp written by: Group Number: 4
 //=====================================================
 
 // --------- Two DFAs ---------------------------------
