@@ -274,7 +274,7 @@ void after_noun();
 // Done by: Stephen Merten
 void syntaxerror1(string word, tokentype token)
 {
-  cout << "SYNTAX ERROR: expected" << tokenName[token] << " but found " << word << endl;
+  cout << "SYNTAX ERROR: expected " << tokenName[token] << " but found " << word << endl;
   exit(1);
 }//end of sytaxerror1
 
@@ -299,7 +299,7 @@ tokentype next_token()
     token_available = true;
     if(saved_token == ERROR)
     {
-      syntaxerror1(saved_lexeme, saved_token);
+      syntaxerror2(saved_lexeme, saved_token);
     }
   }
   return saved_token;
