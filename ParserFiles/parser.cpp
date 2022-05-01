@@ -271,19 +271,18 @@ void after_noun();
 
 
 // Type of error: Lexical Error - given lexeme is not a valid token.
-// Done by: **
-void syntaxerror1(string lexeme)
+// Done by: Stephen Merten
+void syntaxerror1(string word, tokentype token)
 {
-  cout << "Lexical Error: " << lexeme << " is not a valid token." << endl;
+  cout << "SYNTAX ERROR: expected" << tokenName[token] << " but found " << word << endl;
   exit(1);
 }//end of sytaxerror1
 
-
 // Type of error: Syntax Error - unexpected word found in token.
-// Done by: **
+// Done by: Stephen Merten
 void syntaxerror2(string word, tokentype token) 
 {
-  cout << "Syntax error: unexpected " << word << " found in " <<  token << "." << endl;
+  cout << "SYNTAX ERROR: unexpected " << word << " found in " <<  tokenName[token] << "." << endl;
   exit(1);
 }//end of syntaxerror2
 
@@ -300,7 +299,7 @@ tokentype next_token()
     token_available = true;
     if(saved_token == ERROR)
     {
-      syntaxerror1(saved_lexeme);
+      syntaxerror1(saved_lexeme, saved_token);
     }
   }
   return saved_token;
@@ -313,11 +312,11 @@ bool match(tokentype expected)
 {
   if (next_token() != expected)
   {
-    syntaxerror2(saved_lexeme, saved_token);
+    syntaxerror1(saved_lexeme, saved_token);
   }
   else
   {
-    cout << "Matched " << expected << endl;
+    cout << "Matched " << tokenName[expected] << endl;
     token_available = false;
     return true;
   }
@@ -336,18 +335,19 @@ void story()
 {
   cout << "Processing <story>" << endl;
   s();
-
-  while (true && (saved_lexeme != "eofm")) 
-  {
+  while (true) {
+    if (next_token() == EOFM){
+      break;
+    }
     s();
   }
   cout << "Successfully parsed story" << endl;
-
+  return;
 }
 
 
 //Grammar: <s> ::= [CONNECTOR] <noun> SUBJECT <after subject> 
-//Done by: **
+//Done by: Stephen Merten
 void s()
 {
     cout << "Processing <s>" << endl;
@@ -357,6 +357,7 @@ void s()
     noun();
     match(SUBJECT);
     after_subject();
+    return;
 }
 
 
@@ -439,13 +440,13 @@ void after_subject()
   cout << "Processing <after_subject>" << endl;
   switch(next_token())
   {
-    case WORD1:
+    case WORD2:
     case PRONOUN:
       verb();
       tense();
       match(PERIOD);
       break;
-    case WORD2:
+    case WORD1:
       noun();
       after_noun();
       break;
@@ -475,6 +476,7 @@ void after_noun()
       match(PERIOD);
       break;
       case OBJECT:
+      match(OBJECT);
       after_object();
       break;
       default:
@@ -490,18 +492,20 @@ void after_object()
   cout << "Processing <after_object>" << endl;
   switch(next_token()) 
   {
-    case WORD1:
+    case WORD2:
       verb();
       tense();
       match(PERIOD);
       break;
-    case WORD2:
+    case WORD1:
       noun();
       match(DESTINATION);
       verb();
       tense();
       match(PERIOD);
       break;
+    default:
+      syntaxerror2(saved_lexeme, saved_token);
   }
 }
 
