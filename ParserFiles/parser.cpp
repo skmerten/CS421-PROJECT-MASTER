@@ -434,7 +434,7 @@ void tense()
 
 
 //Grammer: <after subject> := <verb> <tense> PERIOD | <noun> <after noun>
-//Done by: Zach Pownell
+//Done by: Stephen Merten
 void after_subject()
 {
   cout << "Processing <after_subject>" << endl;
@@ -513,7 +513,7 @@ void after_object()
 //----------- Driver ---------------------------                                                                 
 
 // The new test driver to start the parser                                             
-// Done by:  **   
+// Done by:  Zach Pownell
 
 string filename;
 int main()
