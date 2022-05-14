@@ -180,7 +180,7 @@ tokentype reservedTokens[reservedWordCount] = {VERB, VERBNEG, VERBPAST, VERBPAST
 // ------------ Scanner and Driver ----------------------- 
 
 ifstream fin;  // global stream for reading from the input file
-
+ofstream fout;
 // Scanner processes only one word each time it is called
 // Gives back the token type and the word itself
 // ** Done by: Zach Pownell and Larry Haskel
@@ -530,16 +530,21 @@ struct lexiconPair
   string word;
   string translation;
 };
-
 vector<lexiconPair> Lexicon;
 
 // ** Additions to parser.cpp here:
 //    getEword() - using the current saved_lexeme, look up the English word
 //                 in Lexicon if it is there -- save the result   
 //                 in saved_E_word
-//  Done by: ** 
-
-void getEword();    // I'm just adding these here for the sake of updating parser.cpp without errors ~Stephen
+//  Done by: Stephen Merten
+string saved_E_word; // Not sure if this needs to be declared higher up. I think it's only use is in gen() ~ Stephen 
+void getEword(){
+  for (int i = 0; i < Lexicon.size(); i++){
+    if(Lexicon[i].word == saved_lexeme){
+      saved_E_word = Lexicon[i].translation;
+    }
+  }
+}
 
 //    gen(line_type) - using the line type,
 //                     sends a line of an IR to translated.txt
@@ -577,9 +582,8 @@ int main()
   lexIn.close();
 
   //** opens the output file translated.txt
-  ofstream fout;
+  // fout declared above as global ofstream ~ Stephen
   fout.open("translated.txt");
-
 
   string filename;
   cout << "Enter the input file name: ";
@@ -589,11 +593,10 @@ int main()
   //** calls the <story> to start parsing
   story();
 
-
   //** closes the input file 
   fin.close();
   //** closes traslated.txt
-  fin.close();
+  fout.close();
  
 }// end
 //** require no other input files!
