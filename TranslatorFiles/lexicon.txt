@@ -1,13 +1,13 @@
-  watashi	I/me				
-  anata		you				
-  kare		he/him				
-  kanojo	she/her				
-  sore      	it				
+watashi	I/me				
+anata		you				
+kare		he/him				
+kanojo	she/her				
+sore      	it				
 
-  mata          Also                           	
-  soshite       Then                   		
-  shikashi	However				
-  dakara	Therefore			
+mata          Also                           	
+soshite       Then                   		
+shikashi	However				
+dakara	Therefore			
 
 daigaku     college    
 kurasu      class     
