@@ -156,7 +156,7 @@ bool period (string s) {
 // TABLES Done by: Zach Pownell and Larry Haskel
 
 // Dumping ALL token types from documentation here
-enum tokentype {WORD, WORD1, WORD2, PERIOD, VERB, VERBNEG, VERBPAST, VERBPASTNEG, IS, WAS, OBJECT, SUBJECT, DESTINATION, PRONOUN, CONNECTOR, EOFM, ERROR, ACTOR, ACTION, TENSE, DESCRIPTION, TO};
+enum tokentype {WORD, WORD1, WORD2, PERIOD, VERB, VERBNEG, VERBPAST, VERBPASTNEG, IS, WAS, OBJECT, SUBJECT, DESTINATION, PRONOUN, CONNECTOR, EOFM, ERROR};
 // Per instructions: this list of strings directly matches the above. I think We have freedom to change but for now i left it. ~ Stephen
 string tokenName[30] = {"WORD", "WORD1", "WORD2", "PERIOD", "VERB", "VERBNEG", "VERBPAST", "VERBPASTNEG", "IS", "WAS", "OBJECT", "SUBJECT", "DESTINATION", "PRONOUN", "CONNECTOR", "EOFM", "ERROR"};
 
@@ -251,7 +251,7 @@ void after_object();
 void after_subject();
 void after_noun();
 void getEword();
-void gen(tokentype line_type);
+void gen(string line_type);
 
 /* INSTRUCTION:  Complete all ** parts.
    You may use any method to connect this file to scanner.cpp
@@ -351,12 +351,12 @@ void s()
     if(next_token() == CONNECTOR){
         match(CONNECTOR);
         getEword();
-        gen(CONNECTOR);
+        gen("CONNECTOR");
     }
     noun();
     getEword();
     match(SUBJECT);
-    gen(ACTOR);
+    gen("ACTOR");
     after_subject();
     return;
 }
@@ -444,9 +444,9 @@ void after_subject()
         case WORD2:
         case PRONOUN:
             verb();
-            gen(ACTION);
+            gen("ACTION");
             tense();
-            gen(TENSE);
+            gen("TENSE");
             match(PERIOD);
             break;
         case WORD1:
@@ -471,24 +471,24 @@ void after_noun()
         case IS:
         case WAS:
             be();
-            gen(DESCRIPTION);
-            gen(TENSE);
+            gen("DESCRIPTION");
+            gen("TENSE");
             match(PERIOD);
             break;
         case DESTINATION:
             getEword();
             match (DESTINATION);
-            gen(TO);
+            gen("TO");
             verb();
-            gen(ACTION);
+            gen("ACTION");
             tense();
-            gen(TENSE);
+            gen("TENSE");
             match(PERIOD);
             break;
         case OBJECT:
             getEword();
             match(OBJECT);
-            gen(OBJECT);
+            gen("OBJECT");
             after_object();
             break;
         default:
@@ -506,20 +506,24 @@ void after_object()
     {
         case WORD2:
             verb();
-            gen(ACTION);
+            getEword();
+            gen("ACTION");
             tense();
-            gen(TENSE);
+            getEword();
+            gen("TENSE");
             match(PERIOD);
             break;
         case WORD1:
             noun();
             getEword();
             match(DESTINATION);
-            gen(TO);
+            gen("TO");
             verb();
-            gen(ACTION);
+            getEword();
+            gen("ACTION");
             tense();
-            gen(TENSE);
+            getEword();
+            gen("TENSE");
             match(PERIOD);
             break;
         default:
@@ -557,10 +561,15 @@ vector<lexiconPair> Lexicon;
 //  Done by: Stephen Merten
 string saved_E_word;
 void getEword() {
+    bool found = false;
     for (int i = 0; i < Lexicon.size(); i++){
         if(Lexicon[i].word == saved_lexeme){
             saved_E_word = Lexicon[i].translation;
+            found = true;
         }
+    }
+    if (!found){
+        saved_E_word = saved_lexeme;
     }
 }
 
@@ -569,33 +578,12 @@ void getEword() {
 //                     (saved_E_word or saved_token is used)
 //  Done by: **
 
-void gen(tokentype line_type)
+void gen(string line_type)
 {
-    switch (line_type) {
-
-        case CONNECTOR:
-            fout << "CONNECTOR: " << saved_E_word << endl;
-            break;
-        case ACTOR:
-            fout << "ACTOR: " << saved_E_word << endl;
-            break;
-        case ACTION:
-            fout << "ACTION: " << saved_E_word << endl;
-            break;
-        case OBJECT:
-            fout << "OBJECT: " << saved_E_word << endl;
-            break;
-        case DESCRIPTION:
-            fout << "DESCRIPTION: " << saved_E_word << endl;
-            break;
-        case TO:
-            fout << "TO: " << saved_E_word << endl;
-            break;
-        case TENSE:
-            fout << "TENSE: " << saved_E_word << endl;
-            break;
-        default:
-            return;
+    if (line_type == "TENSE"){
+        fout << "TENSE: " << tokenName[saved_token] << endl;
+    }else{
+        fout << line_type << ": " << saved_E_word << endl;
     }
 }
 // ----- Changes to the parser.cpp content ---------------------
